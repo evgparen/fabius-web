@@ -3,62 +3,6 @@
   "inception_equity": 12030.0,
   "data": [
     {
-      "date": "2026-02-09",
-      "equity": 1000.0,
-      "cash": 1000.0,
-      "positions": 0,
-      "spy": 693.95,
-      "iwda": 113.23
-    },
-    {
-      "date": "2026-02-10",
-      "equity": 988.2,
-      "cash": 215.26,
-      "positions": 0,
-      "spy": 692.12,
-      "iwda": 113.43
-    },
-    {
-      "date": "2026-02-11",
-      "equity": 988.03,
-      "cash": 210.14,
-      "positions": 0,
-      "spy": 691.96,
-      "iwda": 113.43
-    },
-    {
-      "date": "2026-02-12",
-      "equity": 1030.12,
-      "cash": 1011.64,
-      "positions": 0,
-      "spy": 681.27,
-      "iwda": 112.35
-    },
-    {
-      "date": "2026-02-13",
-      "equity": 1029.82,
-      "cash": 1011.69,
-      "positions": 0,
-      "spy": 681.75,
-      "iwda": 112.28
-    },
-    {
-      "date": "2026-02-16",
-      "equity": 1030.15,
-      "cash": 1011.99,
-      "positions": 0,
-      "spy": null,
-      "iwda": 111.99
-    },
-    {
-      "date": "2026-02-17",
-      "equity": 1029.86,
-      "cash": 1011.93,
-      "positions": 0,
-      "spy": 682.85,
-      "iwda": 112.31
-    },
-    {
       "date": "2026-02-18",
       "equity": 12031.27,
       "cash": 12013.19,
@@ -184,7 +128,7 @@
       "cash": 1215.09,
       "positions": 0,
       "spy": 676.33,
-      "iwda": NaN
+      "iwda": null
     },
     {
       "date": "2026-03-12",
