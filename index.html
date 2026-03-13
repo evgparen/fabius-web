@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabius — Systematic Equity Strategy</title>
+<meta name="description" content="Fabius is a fully automated, rules-based equity strategy designed for capital preservation and steady absolute returns.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf8;
+  --bg2: #f2f1ed;
+  --text: #1a1a1a;
+  --text2: #6b6b67;
+  --text3: #9b9b95;
+  --border: rgba(0,0,0,0.08);
+  --green: #1D9E75;
+  --red: #E24B4A;
+  --blue: #378ADD;
+  --gray: #888780;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1a;
+    --bg2: #252525;
+    --text: #e8e8e4;
+    --text2: #a0a098;
+    --text3: #6b6b65;
+    --border: rgba(255,255,255,0.08);
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Source Sans 3', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+.header {
+  margin-bottom: 2.5rem;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+.header-sub {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text2);
+}
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(29,158,117,0.12);
+  color: var(--green);
+}
+.live-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+@media (max-width: 600px) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.metric {
+  background: var(--bg2);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.metric .label {
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
+}
+.metric .val {
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  font-weight: 500;
+}
+.metric .val.pos { color: var(--green); }
+.metric .val.neg { color: var(--red); }
+.metric .hint {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 1rem;
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  margin-bottom: 2.5rem;
+}
+.strat {
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.strat h2 {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.strat p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+.strat p:last-of-type { margin-bottom: 0; }
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.pill {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--bg2);
+  color: var(--text2);
+  border: 0.5px solid var(--border);
+}
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.8;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--border);
+}
+.loading {
+  text-align: center;
+  padding: 4rem 0;
+  font-size: 14px;
+  color: var(--text3);
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Fabius</h1>
+    <div class="header-sub">
+      <span class="live-badge">live</span>
+      <span>Systematic equity strategy — inception 19.02.2026</span>
+    </div>
+  </div>
+
+  <div id="metrics" class="metrics">
+    <div class="loading">Loading data...</div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="chart-wrap">
+    <canvas id="perfChart"></canvas>
+  </div>
+
+  <div class="strat">
+    <h2>Strategy profile</h2>
+    <p>Fabius is a fully automated, rules-based equity strategy designed for capital preservation and steady absolute returns. The system trades exclusively in highly liquid, large-cap securities across US and European markets.</p>
+    <p>The strategy employs strict risk management at every level: no margin, no leverage, no short-selling, no derivatives. A permanent cash reserve is maintained at all times. Every position is protected by individual stop-loss orders from the moment of entry. A market-wide circuit breaker automatically reduces exposure during sustained downturns.</p>
+    <p>All execution is deterministic — no discretionary overrides, no manual intervention. The system operates on a fixed daily schedule with predefined entry and exit criteria.</p>
+    <div class="pills">
+      <span class="pill">Long only</span>
+      <span class="pill">No leverage</span>
+      <span class="pill">No margin</span>
+      <span class="pill">No derivatives</span>
+      <span class="pill">Large-cap only</span>
+      <span class="pill">Automated stop-loss</span>
+      <span class="pill">Cash reserve</span>
+      <span class="pill">Crash protection</span>
+      <span class="pill">Fully systematic</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    Past performance is not indicative of future results. This is not investment advice.<br>
+    Fabius — systematic trading system — updated daily after US market close
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+async function init() {
+  let data;
+  try {
+    const resp = await fetch('./equity_history.json?t=' + Date.now());
+    data = await resp.json();
+  } catch(e) {
+    document.getElementById('metrics').innerHTML = '<div class="loading">Failed to load data</div>';
+    return;
+  }
+
+  const entries = data.data;
+  if (!entries || entries.length === 0) return;
+
+  const inception = data.inception_equity;
+  const first = entries[0];
+  const last = entries[entries.length - 1];
+
+  // Normalized performance (base 100)
+  const spyBase = first.spy;
+  const iwdaBase = first.iwda;
+
+  const labels = [];
+  const fabLine = [];
+  const spyLine = [];
+  const iwdaLine = [];
+
+  entries.forEach(e => {
+    const d = e.date.split('-');
+    labels.push(d[2] + '.' + d[1]);
+    fabLine.push(Math.round((e.equity / inception) * 10000) / 100);
+    spyLine.push(e.spy ? Math.round((e.spy / spyBase) * 10000) / 100 : null);
+    iwdaLine.push(e.iwda ? Math.round((e.iwda / iwdaBase) * 10000) / 100 : null);
+  });
+
+  const fabRet = ((last.equity / inception) - 1) * 100;
+  const spyRet = last.spy ? ((last.spy / spyBase) - 1) * 100 : null;
+  const iwdaRet = last.iwda ? ((last.iwda / iwdaBase) - 1) * 100 : null;
+  const alpha = spyRet !== null ? fabRet - spyRet : null;
+  const days = entries.length;
+
+  function fmt(v) {
+    return (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+  }
+  function cls(v) {
+    return v >= 0 ? 'pos' : 'neg';
+  }
+
+  document.getElementById('metrics').innerHTML = `
+    <div class="metric">
+      <div class="label">Return (since inception)</div>
+      <div class="val ${cls(fabRet)}">${fmt(fabRet)}</div>
+      <div class="hint">${days} trading days</div>
+    </div>
+    <div class="metric">
+      <div class="label">S&P 500 (same period)</div>
+      <div class="val ${spyRet !== null ? cls(spyRet) : ''}">${spyRet !== null ? fmt(spyRet) : 'n/a'}</div>
+      <div class="hint">Benchmark</div>
+    </div>
+    <div class="metric">
+      <div class="label">MSCI World (same period)</div>
+      <div class="val ${iwdaRet !== null ? cls(iwdaRet) : ''}">${iwdaRet !== null ? fmt(iwdaRet) : 'n/a'}</div>
+      <div class="hint">Benchmark</div>
+    </div>
+    <div class="metric">
+      <div class="label">Alpha vs S&P 500</div>
+      <div class="val ${alpha !== null ? cls(alpha) : ''}">${alpha !== null ? fmt(alpha) : 'n/a'}</div>
+      <div class="hint">Outperformance</div>
+    </div>
+  `;
+
+  document.getElementById('legend').innerHTML = `
+    <span><span class="dot" style="background:#1D9E75"></span>Fabius ${fmt(fabRet)}</span>
+    <span><span class="dot" style="background:#378ADD"></span>S&P 500 ${spyRet !== null ? fmt(spyRet) : 'n/a'}</span>
+    <span><span class="dot" style="background:#888780"></span>MSCI World ${iwdaRet !== null ? fmt(iwdaRet) : 'n/a'}</span>
+  `;
+
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const tickColor = isDark ? '#6b6b65' : '#888780';
+
+  const allVals = [...fabLine, ...spyLine.filter(v=>v), ...iwdaLine.filter(v=>v)];
+  const yMin = Math.floor(Math.min(...allVals)) - 1;
+  const yMax = Math.ceil(Math.max(...allVals)) + 1;
+
+  new Chart(document.getElementById('perfChart'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Fabius',
+          data: fabLine,
+          borderColor: '#1D9E75',
+          backgroundColor: 'rgba(29,158,117,0.06)',
+          fill: true,
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 5,
+          tension: 0.3,
+        },
+        {
+          label: 'S&P 500',
+          data: spyLine,
+          borderColor: '#378ADD',
+          borderWidth: 1.5,
+          borderDash: [6, 3],
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0.3,
+          fill: false,
+        },
+        {
+          label: 'MSCI World',
+          data: iwdaLine,
+          borderColor: '#888780',
+          borderWidth: 1.5,
+          borderDash: [3, 3],
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0.3,
+          fill: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(30,30,30,0.92)',
+          titleFont: { family: 'DM Mono', size: 12 },
+          bodyFont: { family: 'DM Mono', size: 12 },
+          padding: 10,
+          cornerRadius: 6,
+          callbacks: {
+            label: function(ctx) {
+              const v = ctx.parsed.y;
+              if (v === null) return null;
+              const diff = (v - 100).toFixed(2);
+              const sign = diff >= 0 ? '+' : '';
+              return ctx.dataset.label + ': ' + sign + diff + '%';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'DM Mono', size: 11 }, color: tickColor, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 },
+          border: { display: false }
+        },
+        y: {
+          grid: { color: gridColor },
+          ticks: {
+            font: { family: 'DM Mono', size: 11 },
+            color: tickColor,
+            callback: function(v) { const d = v - 100; return (d >= 0 ? '+' : '') + d.toFixed(0) + '%'; }
+          },
+          border: { display: false },
+          min: yMin,
+          max: yMax
+        }
+      }
+    }
+  });
+}
+
+init();
+</script>
+</body>
+</html>
