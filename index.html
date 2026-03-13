@@ -84,7 +84,7 @@ body {
 }
 .metrics {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin-bottom: 2rem;
 }
@@ -190,10 +190,11 @@ body {
 <body>
 <div class="container">
   <div class="header">
-    <h1>Fabius</h1>
+    <h1>Fabius Capital</h1>
     <div class="header-sub">
+      <span>systematic trading system</span>
       <span class="live-badge">live</span>
-      <span>Systematic equity strategy — inception 19.02.2026</span>
+      <span>inception 19.02.2026</span>
     </div>
   </div>
 
@@ -295,11 +296,6 @@ async function init() {
       <div class="label">MSCI World (same period)</div>
       <div class="val ${iwdaRet !== null ? cls(iwdaRet) : ''}">${iwdaRet !== null ? fmt(iwdaRet) : 'n/a'}</div>
       <div class="hint">Benchmark</div>
-    </div>
-    <div class="metric">
-      <div class="label">Alpha vs S&P 500</div>
-      <div class="val ${alpha !== null ? cls(alpha) : ''}">${alpha !== null ? fmt(alpha) : 'n/a'}</div>
-      <div class="hint">Outperformance</div>
     </div>
   `;
 
