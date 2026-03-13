@@ -1,5 +1,198 @@
 {
   "inception": "2026-02-19",
   "inception_equity": 12030.0,
-  "data": []
+  "data": [
+    {
+      "date": "2026-02-09",
+      "equity": 1000.0,
+      "cash": 1000.0,
+      "positions": 0,
+      "spy": 693.95,
+      "iwda": 113.23
+    },
+    {
+      "date": "2026-02-10",
+      "equity": 988.2,
+      "cash": 215.26,
+      "positions": 0,
+      "spy": 692.12,
+      "iwda": 113.43
+    },
+    {
+      "date": "2026-02-11",
+      "equity": 988.03,
+      "cash": 210.14,
+      "positions": 0,
+      "spy": 691.96,
+      "iwda": 113.43
+    },
+    {
+      "date": "2026-02-12",
+      "equity": 1030.12,
+      "cash": 1011.64,
+      "positions": 0,
+      "spy": 681.27,
+      "iwda": 112.35
+    },
+    {
+      "date": "2026-02-13",
+      "equity": 1029.82,
+      "cash": 1011.69,
+      "positions": 0,
+      "spy": 681.75,
+      "iwda": 112.28
+    },
+    {
+      "date": "2026-02-16",
+      "equity": 1030.15,
+      "cash": 1011.99,
+      "positions": 0,
+      "spy": null,
+      "iwda": 111.99
+    },
+    {
+      "date": "2026-02-17",
+      "equity": 1029.86,
+      "cash": 1011.93,
+      "positions": 0,
+      "spy": 682.85,
+      "iwda": 112.31
+    },
+    {
+      "date": "2026-02-18",
+      "equity": 12031.27,
+      "cash": 12013.19,
+      "positions": 0,
+      "spy": 686.29,
+      "iwda": 113.54
+    },
+    {
+      "date": "2026-02-19",
+      "equity": 12031.94,
+      "cash": 11088.95,
+      "positions": 0,
+      "spy": 684.48,
+      "iwda": 113.39
+    },
+    {
+      "date": "2026-02-20",
+      "equity": 11988.39,
+      "cash": 2301.58,
+      "positions": 0,
+      "spy": 689.43,
+      "iwda": 113.67
+    },
+    {
+      "date": "2026-02-23",
+      "equity": 12083.46,
+      "cash": 1700.32,
+      "positions": 0,
+      "spy": 682.39,
+      "iwda": 112.92
+    },
+    {
+      "date": "2026-02-24",
+      "equity": 12151.03,
+      "cash": 1702.03,
+      "positions": 0,
+      "spy": 687.35,
+      "iwda": 113.38
+    },
+    {
+      "date": "2026-02-25",
+      "equity": 12046.88,
+      "cash": 1697.0,
+      "positions": 0,
+      "spy": 693.15,
+      "iwda": 114.25
+    },
+    {
+      "date": "2026-02-26",
+      "equity": 12084.84,
+      "cash": 1698.71,
+      "positions": 0,
+      "spy": 689.3,
+      "iwda": 114.03
+    },
+    {
+      "date": "2026-02-27",
+      "equity": 12111.05,
+      "cash": 1809.0,
+      "positions": 0,
+      "spy": 685.99,
+      "iwda": 113.57
+    },
+    {
+      "date": "2026-03-02",
+      "equity": 12246.13,
+      "cash": 1826.26,
+      "positions": 0,
+      "spy": 686.38,
+      "iwda": 113.83
+    },
+    {
+      "date": "2026-03-03",
+      "equity": 12224.95,
+      "cash": 2418.09,
+      "positions": 0,
+      "spy": 680.33,
+      "iwda": 112.64
+    },
+    {
+      "date": "2026-03-04",
+      "equity": 12186.01,
+      "cash": 2413.84,
+      "positions": 0,
+      "spy": 685.13,
+      "iwda": 113.86
+    },
+    {
+      "date": "2026-03-05",
+      "equity": 12085.15,
+      "cash": 3990.45,
+      "positions": 0,
+      "spy": 681.31,
+      "iwda": 113.25
+    },
+    {
+      "date": "2026-03-06",
+      "equity": 12028.74,
+      "cash": 4602.86,
+      "positions": 0,
+      "spy": 672.38,
+      "iwda": null
+    },
+    {
+      "date": "2026-03-09",
+      "equity": 11981.13,
+      "cash": 4595.64,
+      "positions": 0,
+      "spy": 678.27,
+      "iwda": null
+    },
+    {
+      "date": "2026-03-10",
+      "equity": 11994.73,
+      "cash": 3756.28,
+      "positions": 0,
+      "spy": 677.18,
+      "iwda": null
+    },
+    {
+      "date": "2026-03-11",
+      "equity": 12007.55,
+      "cash": 1215.09,
+      "positions": 0,
+      "spy": 676.33,
+      "iwda": NaN
+    },
+    {
+      "date": "2026-03-12",
+      "equity": 12055.55,
+      "cash": 1436.97,
+      "positions": 0,
+      "spy": null,
+      "iwda": null
+    }
+  ]
 }
